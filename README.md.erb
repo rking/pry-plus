@@ -1,5 +1,5 @@
-pry-full
-=======
+pry-plus
+========
 
 Get up and going with a good set of pry tools right away.
 
