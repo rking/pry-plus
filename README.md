@@ -82,6 +82,7 @@ Other tips
 ----------
 
 As an alternative to `bundle open somegem`, there's this cool sequence:
+
     gem-cd somegem
     .zsh
 
