@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+loader = 'Thread.new { Pry.load_plugins; puts "Done." if ENV["PRYQ_VERBOSE"] };'
+warn 'Note: pry-doc does not work under pryq'
+system *(%W(pry --no-plugins -e #{loader}) + ARGV)

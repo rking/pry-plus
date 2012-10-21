@@ -1,0 +1,86 @@
+#!/usr/bin/env ruby
+
+require 'pry'
+begin
+  require 'bond'
+rescue LoadError
+  warn "You have to have the bond gem and a pry >0.9.10 for this demo to work."
+  exit 1
+end
+
+DEMO_METHODS = %w(tab_hash tab_pry_commands tab_chain tab_require)
+NOTABLE_LINE_OFFSET_BY_CONVENTION = 2
+def go
+  DEMO_METHODS.each do |name| method(name).call end
+  "That's all, for now!"
+end
+
+def tab_hash
+  data = {asdf: 1, bsdf: 2, csdf: 3}
+  1 # ← (Sorry about this noise. It's to give the debugger a breakpoint.)
+  # To see hash-key completion, type:   data[:<Tab><Tab>
+  # (then hit ^D to keep going)
+end
+
+
+
+
+
+
+def tab_pry_commands
+  # Without bond, pry tries to complete symbols for every command context.
+  1
+  # Try it out:
+  #   edit ./<Tab>
+  # (Note that not all commands have perfect completion lists. Github Issues
+  # are welcomed if you want to point out the ones that still need work!)
+end
+
+
+
+
+class Donkey; def eeyaww; 'EEYAWW!' end end
+class Monkey; def donkey; Donkey.new end end
+def tab_chain
+  # Try Monkey.new.donkey.<Tab><Tab>
+  1
+  # Bond actually evaluates the method chain, completing only Donkey methods.
+  # (If you try this in the builtin completer, it will complete *all* methods)
+end
+
+
+
+
+
+def tab_require
+  # Oh, so you'd like to `require` with tabcompletion?
+  1
+  # Try:
+  #   require 'u<Tab><Tab>
+  # (Don't worry about the .rb at the end, require works fine with it.)
+end
+
+
+Pry.config.hooks.add_hook :when_started, :test_hook do |target, opt, _pry_|
+  DEMO_METHODS.each do |name|
+    meth = method name
+    file, line = meth.source_location
+    line += NOTABLE_LINE_OFFSET_BY_CONVENTION
+    PryDebugger::Breakpoints.add file, line
+  end
+  # This is kinda junky, but required to satisfy the breakpoint:
+  Pry.instance_variable_get(:@processor).instance_variable_set :@pry, _pry_
+end
+
+
+
+
+
+binding.pry
+# Let's check out few new features from the new completion backed by the `bond`
+# gem.
+# To get started, hit ^D.
+
+
+
+go

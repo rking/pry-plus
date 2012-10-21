@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+require 'pry'
+require 'pry-exception_explorer'
+Pry.cli = true # for "enter-exception", currently needed unless run as "pry".
+
+def faily_func
+  # You start at the location of the raise, but perhaps the trouble was
+  # earlier. Use pry-stack_explorer's "up" command to navigate.
+  raise 'Foo'
+end
+
+def outer_func
+  # Aha!  You found me, the function at fault!
+  # Now, try "edit -c" to edit this file and make the "true" a "false"
+  should_never_happen = true
+  faily_func if should_never_happen
+end
+
+# You'll now see a demo of how to explore with pry-exception_explorer.
+# Sometimes you end up with an exception in the REPL, and you didn't
+# previously wrap it using the block form of the pry-exception_explorer trap.
+# Go ahead and run "outer_func" (and notice how the exception is thrown, but
+# you can subsequently run "wtf" to see the stack, and "enter-exception" to
+# look around)
+binding.pry

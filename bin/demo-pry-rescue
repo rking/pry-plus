@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+def faily_func
+  fail
+  # Now that you're here, at the cause of the error, do:
+  #   def faily_func; puts "Yay!" end
+  # Then do:
+  #   try-again
+end
+
+def h8r_func
+  faily_func
+rescue
+  # Now run cd-cause again.
+  # (Note: This type of rescue+raise handling is generally an anti-pattern.)
+  raise "Look at me, I found an exception!"
+end
+
+def h9r_func
+  h8r_func
+rescue
+  # Now run: cd-cause
+  raise "Hey!! I found an exception!"
+end
+
+require 'pry-rescue'
+Pry.rescue do
+  h9r_func
+end
+puts "Got to end of dem-pry-rescue. Wasn't that nice?"
