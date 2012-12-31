@@ -1,8 +1,9 @@
 # encoding: utf-8
+require './lib/pry-plus'
 Gem::Specification.new do |s|
   deps = YAML.load_file('in.yml').keys
   s.name          = 'pry-plus'
-  s.version       = '0.1'
+  s.version       = PryPlus::VERSION
   s.license       = 'CC0'
   s.summary       = 'Pry + Essential Plugins'
   s.description   = deps.join ' + '
@@ -11,5 +12,5 @@ Gem::Specification.new do |s|
   s.authors       = ['☈king']
   s.files         = Dir['lib/*']
   s.executables   = Dir['bin/*'].map {|e| e.sub 'bin/', ''}
-  deps.each do |e| s.add_dependency e end
+  deps.each{|e| s.add_dependency e}
 end

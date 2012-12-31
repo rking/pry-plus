@@ -6,7 +6,17 @@ pry-doc:
     - '? [].pop'
     - '$ [].pop'
     - …etc.
-  url: j
+  url: http://banisterfiend.wordpress.com/
+
+pry-docmore:
+  commands: ['show-docmores', 'enhanced ?']
+  desc: >-
+    Shows docs for dollar-vars and keywords
+  use cases:
+    - "show-docmores"
+    - "? module"
+    - "? $`"
+  url: https://github.com/rking/pry-docmore/wiki
 
 pry-debugger:
   commands: [ break, breakpoints, next, step, finish, continue ]
@@ -37,23 +47,26 @@ pry-exception_explorer:
     - http://vimeo.com/36061298 ← "mini screencast"
   url: https://github.com/pry/pry-exception_explorer#readme
 
-plymouth:
-  desc: >-
-    Capture test failures into Pry sessions. This might get overtaken by the
-    pry-rescue approach.
-  use cases:
-    - Tightening the red/green/refactor loop.
-  url: https://github.com/banister/plymouth#readme
-
 pry-rescue:
   commands: [ try-again, cd-cause ]
   desc: Provides `Pry.rescue do … end` to capture any exceptions and start pry
     from the context of the source of the exception.
   use cases:
     - Shortens write-run-debug cycles when exceptions are involved.
-    - Specifically, RSpec integration. https://github.com/exad/zu/blob/master/spec/spec_helper.rb#L15
     - Exploring causes of hard-to-replicate exceptions.
+    - Rescues on test failure via `require` of `pry-rescue/minitest` and `pry-rescue/rspec`
   url: https://github.com/ConradIrwin/pry-rescue#readme
+
+bond:
+  desc: >-
+    An excellent tabcompletion gem. Having this dep enables new Pry stuff.
+    Note that pry v0.9.10 doesn't have this feature, so you must use a repo
+    version.
+  use cases:
+    - "`require 'x<tab>`"
+    - "`{asdf: 1, hjkl: 2}[:a<tab>`"
+    - "`Chain.of.calls.`<tab> # Old pry completion was generic in this case."
+  url: http://tagaholic.me/bond/
 
 jist:
   commands: [ jist, 'enhanced gist' ]

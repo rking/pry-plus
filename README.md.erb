@@ -5,10 +5,9 @@ Get up and going with a good set of pry tools right away.
 
 <%
   require 'cgi'
+  def h unclean; CGI::escapeHTML unclean end
+  require 'yaml'
   list = YAML.load_file 'in.yml'
-  def h unclean
-    CGI::escapeHTML unclean
-  end
 %>
 
 Dependent Gems
@@ -26,15 +25,3 @@ Dependent Gems
 <% end %>
 
 <% end %>
-
-Other tips
-----------
-
-As an alternative to `bundle open somegem`, there's this cool sequence:
-
-    gem-cd somegem
-    .zsh
-
-This will drop you into a temporary shell in the install dir of the gem, where
-you can use `ack` and `cat **/* | vim - +setf\ ruby` and other familiar tools
-to explore new codebases.
