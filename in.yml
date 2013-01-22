@@ -35,18 +35,6 @@ pry-stack_explorer:
   desc: Allows you to navigate the call stack.
   url: https://github.com/pry/pry-stack_explorer#readme
 
-pry-exception_explorer:
-  commands: [ enter-exception, continue-exception, exit-exception ]
-  desc: >-
-    Somewhat of a competitor to pry-rescue, but implemented differently.
-    Currently doesn't work on C exceptions (such as `1/0` errors).
-  use cases:
-    - Let an exception happen in the REPL, then use enter-exception to find it.
-    - Inline-style trap
-    - Block wrapper-style trap
-    - http://vimeo.com/36061298 ← "mini screencast"
-  url: https://github.com/pry/pry-exception_explorer#readme
-
 pry-rescue:
   commands: [ try-again, cd-cause ]
   desc: Provides `Pry.rescue do … end` to capture any exceptions and start pry
@@ -54,6 +42,7 @@ pry-rescue:
   use cases:
     - Shortens write-run-debug cycles when exceptions are involved.
     - Exploring causes of hard-to-replicate exceptions.
+    - `cd-cause` to source of exceptions in code run within Pry
     - Rescues on test failure via `require` of `pry-rescue/minitest` and `pry-rescue/rspec`
   url: https://github.com/ConradIrwin/pry-rescue#readme
 
